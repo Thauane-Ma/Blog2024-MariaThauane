@@ -13,12 +13,12 @@ def login_view(request):
         username = request.POST['username']
         password = request.POST['password']
         
-        # Autenticar o usuário
+    
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
-            login(request, user)  # Loga o usuário
-            return redirect('gerencia:gerencia_inicial')  # Redireciona após login
+            login(request, user)  
+            return redirect('gerencia:gerencia_inicial') 
         else:
             messages.error(request, 'Usuário ou senha inválidos.')
 
@@ -45,7 +45,7 @@ def register(request):
 
 def lista_usuarios(request):
     usuarios_lista = UserBlog.objects.all().order_by('username')
-    paginator = Paginator(usuarios_lista, 5)  # 10 usuários por página
+    paginator = Paginator(usuarios_lista, 10)  
     
     page = request.GET.get('page', 1)
     
